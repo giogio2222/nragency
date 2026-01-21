@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tentang Kami - NR Agency</title>
 
     <meta name="description"
@@ -56,22 +56,40 @@
             --wa-green: #25D366;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* --- GLOBAL RESET & SCROLL FIX --- */
+        html,
         body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+            /* Mencegah geser kanan-kiri */
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
             font-family: 'DM Sans', sans-serif;
             background-color: var(--bg-cream);
             color: var(--text-dark);
-            overflow-x: hidden;
             font-size: 1.15rem;
+            position: relative;
         }
 
         a {
             text-decoration: none;
             color: inherit;
             transition: 0.3s;
+        }
+
+        /* Mencegah teks panjang merusak layout */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        span {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Typography Utility */
@@ -139,6 +157,8 @@
             background-color: var(--bg-dark);
             color: var(--text-white);
             border-left: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 85vw;
+            /* Mencegah offcanvas terlalu lebar di mobile */
         }
 
         .offcanvas-header .btn-close {
@@ -147,6 +167,8 @@
 
         .offcanvas-body {
             overflow-y: auto;
+            /* Mencegah scroll body saat menu terbuka */
+            overscroll-behavior: contain;
         }
 
         .nav-menu-link {
@@ -227,13 +249,21 @@
             background-color: var(--bg-dark);
             color: var(--text-white);
             border-bottom: 1px solid var(--border-light);
-            /* UPDATE: Padding dikurangi agar teks lebih ke atas */
             padding-top: 110px;
             padding-bottom: 100px;
             position: relative;
+            width: 100%;
+            overflow: hidden;
+            /* Tambahan safety */
         }
 
         /* --- SECTIONS --- */
+        section {
+            width: 100%;
+            overflow: hidden;
+            /* Tambahan safety per section */
+        }
+
         .section-white {
             background-color: var(--bg-cream);
             color: var(--text-dark);
@@ -277,6 +307,8 @@
             padding: 5rem;
             position: relative;
             overflow: hidden;
+            /* Penting untuk memotong dekorasi */
+            z-index: 1;
         }
 
         .cta-decoration {
@@ -287,6 +319,7 @@
             height: 200px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
+            z-index: -1;
         }
 
         /* Footer Styling */
@@ -295,6 +328,8 @@
             color: rgba(255, 255, 255, 0.6);
             padding: 6rem 0;
             border-top: 1px solid var(--border-light);
+            width: 100%;
+            overflow: hidden;
         }
 
         .footer-heading {
@@ -335,21 +370,34 @@
 
         /* --- RESPONSIVE ADJUSTMENTS --- */
         @media (max-width: 991px) {
-            html {
+
+            html,
+            body {
                 font-size: 15px;
+                /* Sedikit mengecilkan base font agar muat */
+            }
+
+            .container {
+                padding-left: 20px;
+                padding-right: 20px;
             }
 
             .hero-wrapper {
-                /* UPDATE: Padding mobile dikurangi */
                 padding-top: 90px;
+                padding-bottom: 60px;
             }
 
             .display-1 {
-                font-size: 3.5rem;
+                font-size: 3rem;
+                /* Diperkecil lagi agar aman */
             }
 
             .display-3 {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
+            }
+
+            .display-4 {
+                font-size: 2.2rem;
             }
 
             .about-img-hero {
@@ -357,29 +405,67 @@
                 margin-top: 2rem;
             }
 
+            .section-white,
+            .section-dark,
+            .footer-dark {
+                padding: 4rem 0;
+            }
+
             .cta-box {
-                padding: 2.5rem;
+                padding: 2.5rem 1.5rem;
+                /* Padding lebih aman untuk mobile */
+            }
+
+            .cta-decoration {
+                width: 150px;
+                height: 150px;
+                right: -40px;
+                top: -40px;
             }
 
             .floating-menu-btn {
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                height: 50px;
                 top: 20px;
                 right: 20px;
+                font-size: 1.4rem;
             }
 
             .floating-actions {
                 bottom: 20px;
                 right: 20px;
+                gap: 10px;
             }
 
             .btn-float {
-                width: 50px;
-                height: 50px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .btn-float svg {
+                width: 22px;
+                height: 22px;
             }
 
             .nav-menu-link {
                 font-size: 2.5rem;
+            }
+
+            /* Fix untuk col-pad di mobile agar tidak mentok */
+            .ps-lg-5 {
+                padding-left: 0 !important;
+                margin-top: 1.5rem;
+            }
+
+            .pe-lg-5 {
+                padding-right: 0 !important;
+            }
+
+            .border-start {
+                border-left: none !important;
+                border-top: 1px solid var(--border-light);
+                padding-top: 1.5rem;
+                padding-left: 0 !important;
             }
         }
     </style>
